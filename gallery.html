@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — St. Jude Church (RCSC), Mekkadambu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Gallery filter tabs */
+    .gallery-filters {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .filter-btn {
+      padding: 8px 22px;
+      border: 2px solid var(--border);
+      border-radius: 30px;
+      background: transparent;
+      font-family: var(--ff-body);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--navy);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: var(--white);
+    }
+    /* Gallery grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .photo-thumb {
+      aspect-ratio: 4/3;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      background: var(--navy-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      transition: transform var(--transition);
+    }
+    .photo-thumb:hover { transform: scale(0.97); }
+    .photo-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .photo-thumb .overlay {
+      position: absolute; inset: 0;
+      background: rgba(27,45,91,0.55);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity var(--transition);
+      color: var(--white);
+      font-size: 1.4rem;
+    }
+    .photo-thumb .overlay span {
+      font-family: var(--ff-display);
+      font-size: 0.9rem;
+      margin-top: 6px;
+      color: var(--gold-light);
+    }
+    .photo-thumb:hover .overlay { opacity: 1; }
+
+    /* Video grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .video-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--white);
+    }
+    .video-embed {
+      position: relative;
+      padding-bottom: 56.25%;
+      background: var(--navy-dark);
+    }
+    .video-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 3.5rem;
+      gap: 10px;
+    }
+    .video-placeholder p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+      font-family: var(--ff-body);
+      margin: 0;
+    }
+    .video-info { padding: 16px 18px; }
+    .video-info h4 { margin-bottom: 4px; font-size: 1rem; }
+    .video-info p { font-size: 0.83rem; color: var(--text-light); margin: 0; }
+
+    @media (max-width: 768px) {
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .photo-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Ticker -->
+<div class="ticker-wrap"><div class="container" style="display:flex;align-items:center;">
+  <span class="ticker-label">📢 Announcements</span>
+  <div class="ticker-inner" style="flex:1;overflow:hidden;"><div class="ticker-content">
+    <span>✦ Feast of St. Jude — October 28 &nbsp;</span>
+    <span>✦ Sunday Mass: 7:00 AM &amp; 9:00 AM &nbsp;</span>
+    <span>✦ Visit our YouTube channel for Mass recordings &nbsp;</span>
+    <span>✦ Feast of St. Jude — October 28 &nbsp;</span>
+    <span>✦ Sunday Mass: 7:00 AM &amp; 9:00 AM &nbsp;</span>
+    <span>✦ Visit our YouTube channel for Mass recordings &nbsp;</span>
+  </div></div>
+</div></div>
+
+<!-- Navbar -->
+<header id="navbar"><div class="container nav-inner">
+  <a href="index.html" class="nav-brand"><div class="cross-icon">✝</div><div class="nav-brand-text">
+    <span class="nav-brand-name">St. Jude Church</span><span class="nav-brand-sub">RCSC · Mekkadambu</span>
+  </div></a>
+  <nav><ul class="nav-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li class="nav-item"><a href="liturgy.html">Liturgy ▾</a>
+      <ul class="dropdown"><li><a href="liturgy.html">Mass Schedule</a></li><li><a href="liturgy.html#feast">Feast Days</a></li></ul>
+    </li>
+    <li><a href="administration.html">Administration</a></li>
+    <li><a href="ministries.html">Ministries</a></li>
+    <li><a href="news.html">News &amp; Events</a></li>
+    <li><a href="gallery.html" class="active">Gallery</a></li>
+    <li><a href="downloads.html">Downloads</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul></nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</div></header>
+
+<!-- Page Hero -->
+<div class="page-hero"><div class="container">
+  <h1>Parish Gallery</h1>
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="index.html">Home</a><span>›</span><span>Gallery</span>
+  </nav>
+</div></div>
+
+<!-- ══ PHOTO GALLERY ══ -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-heading reveal">
+      <h2>Photo Gallery</h2>
+      <div class="divider"></div>
+      <p>Captured moments of faith, celebration, and community life at St. Jude Church.</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="gallery-filters reveal">
+      <button class="filter-btn active" data-filter="all">All Photos</button>
+      <button class="filter-btn" data-filter="feast">Feast Day</button>
+      <button class="filter-btn" data-filter="mass">Holy Mass</button>
+      <button class="filter-btn" data-filter="youth">KCYM &amp; Youth</button>
+      <button class="filter-btn" data-filter="catechism">Catechism</button>
+      <button class="filter-btn" data-filter="community">Community</button>
+    </div>
+
+    <!-- Photo Grid -->
+    <!-- 
+      HOW TO ADD REAL PHOTOS:
+      Replace the emoji placeholders with:
+      <img src="images/your-photo.jpg" alt="Description of photo" />
+      and set data-lightbox="images/your-photo.jpg"
+    -->
+    <div class="photo-grid reveal" id="photoGrid">
+
+      <div class="photo-thumb" data-cat="feast" data-lightbox="images/feast1.jpg" data-caption="Feast of St. Jude 2024 — Solemn Mass">
+        <span>⛪</span>
+        <div class="overlay">🔍<span>Feast Day 2024</span></div>
+      </div>
+
+      <div class="photo-thumb" data-cat="feast" data-lightbox="images/feast2.jpg" data-caption="Procession during Feast Day">
+        <span>🎉</span>
+        <div class="overlay">🔍<span>Feast Procession</span></div>
+      </div>
+
+      <div class="photo-thumb" data-cat="mass" data-lightbox="images/mass1.jpg" data-caption="Sunday Holy Mass">
+        <span>🕯️</span>
+        <div class="overlay">🔍<span>Sunday Mass</span></div>
+      </div>
+
+      <div class="photo-thumb" data-cat="youth" data-lightbox="images/kcym1.jpg" data-caption="KCYM Blood Donation Camp 2025">
+        <span>❤️</span>
+        <div class="overlay">🔍<span>Blood Donation Camp</span></div>
+      </div>
+
+      <div class="photo-thumb" data-cat="catechism" data-lightbox="images/cat1.jpg" data-caption="Catechism Graduation 2024">
+        <span>🎓</span>
+        <div class="overlay">🔍<span>Catechism Graduation</span></div>
+      </div>
+
+      <div class="photo-thumb" data-cat="feast" data-lightbox="images/feast3.jpg" data-caption="Parish Feast Celebrations">
+        <span>🌺</span>
+        <div class="overlay">🔍<span>Feast Celebrations</span></div>
+      </div>
+
+      <div class="photo-thumb" data-cat="community" data-lightbox="images/comm1.jpg" data-caption="Parish Community Gathering">
+        <span>👨‍👩‍👧‍👦</span>
+        <div class="overlay">🔍<span>Community Gathering</span></div>
+      </div>
+
+      <div class="photo-thumb" data-cat="mass" data-lightbox="images/mass2.jpg" data-caption="Christmas Midnight Mass 2024">
+        <span>⭐</span>
+        <div class="overlay">🔍<span>Christmas Mass 2024</span></div>
+      </div>
+
+      <div class="photo-thumb" data-cat="youth" data-lightbox="images/kcym2.jpg" data-caption="KCYM Annual Day">
+        <span>✊</span>
+        <div class="overlay">🔍<span>KCYM Annual Day</span></div>
+      </div>
+
+      <div class="photo-thumb" data-cat="community" data-lightbox="images/comm2.jpg" data-caption="Parish Hall Inauguration">
+        <span>🏛️</span>
+        <div class="overlay">🔍<span>Parish Hall</span></div>
+      </div>
+
+      <div class="photo-thumb" data-cat="catechism" data-lightbox="images/cat2.jpg" data-caption="First Holy Communion 2024">
+        <span>🕊️</span>
+        <div class="overlay">🔍<span>First Communion 2024</span></div>
+      </div>
+
+      <div class="photo-thumb" data-cat="mass" data-lightbox="images/mass3.jpg" data-caption="Easter Vigil Mass">
+        <span>🪔</span>
+        <div class="overlay">🔍<span>Easter Vigil</span></div>
+      </div>
+
+    </div>
+
+    <div class="text-center" style="margin-top:32px;" class="reveal">
+      <p style="color:var(--text-light);font-size:0.9rem;margin-bottom:16px;">
+        📸 To share parish photos, send them to <strong>stjude.mekkadambu@gmail.com</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VIDEO SECTION ══ -->
+<section class="section bg-cream">
+  <div class="container">
+    <div class="section-heading reveal">
+      <h2>Videos</h2>
+      <div class="divider"></div>
+      <p>Watch Mass recordings, feast celebrations, and parish events on our YouTube channel.</p>
+    </div>
+
+    <div class="video-grid">
+      <div class="video-card reveal">
+        <div class="video-embed">
+          <!-- REPLACE src with actual YouTube embed URL:
+               https://www.youtube.com/embed/VIDEO_ID -->
+          <div class="video-placeholder">
+            <span>▶️</span>
+            <p>Feast of St. Jude 2024 — Full Celebration</p>
+          </div>
+        </div>
+        <div class="video-info">
+          <h4>Feast of St. Jude Thaddaeus — 2024</h4>
+          <p>Solemn Mass, procession, and parish celebrations on October 28, 2024.</p>
+        </div>
+      </div>
+
+      <div class="video-card reveal reveal-delay-1">
+        <div class="video-embed">
+          <div class="video-placeholder">
+            <span>▶️</span>
+            <p>Christmas Midnight Mass 2024</p>
+          </div>
+        </div>
+        <div class="video-info">
+          <h4>Christmas Midnight Mass — 2024</h4>
+          <p>Full recording of the Christmas Midnight Mass celebrated at St. Jude Church.</p>
+        </div>
+      </div>
+
+      <div class="video-card reveal reveal-delay-2">
+        <div class="video-embed">
+          <div class="video-placeholder">
+            <span>▶️</span>
+            <p>KCYM Annual Day Programme</p>
+          </div>
+        </div>
+        <div class="video-info">
+          <h4>KCYM Annual Day — 2024</h4>
+          <p>Highlights of the youth annual day programme with cultural performances and awards.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center" style="margin-top:30px;">
+      <a href="https://www.youtube.com/@YourChannelHere" target="_blank" rel="noopener noreferrer" class="btn btn-navy">
+        ▶ Visit Our YouTube Channel
+      </a>
+      <p style="margin-top:12px;font-size:0.82rem;color:var(--text-light);">
+        Replace the YouTube channel link with the actual parish channel URL.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="lightbox-inner">
+    <img id="lightboxImg" src="" alt="" />
+    <p id="lightboxCaption" style="text-align:center;color:var(--gold-light);font-family:var(--ff-display);font-size:1.1rem;margin-top:12px;"></p>
+  </div>
+  <button id="lightboxClose" class="lightbox-close" aria-label="Close photo viewer">×</button>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container"><div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+        <div style="width:38px;height:38px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--navy-dark);">✝</div>
+        <div><span style="font-family:var(--ff-display);font-size:1.1rem;color:var(--white);display:block;">St. Jude Church</span>
+        <span style="font-size:0.72rem;color:rgba(255,255,255,0.5);display:block;">RCSC · Mekkadambu</span></div>
+      </div>
+      <p>Roman Catholic Syrian Church, Diocese of Muvattupuzha.</p>
+    </div>
+    <div class="footer-col"><h4>Quick Links</h4><ul>
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="liturgy.html">Mass Schedule</a></li><li><a href="news.html">News</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Mass Timings</h4><ul>
+      <li><a href="liturgy.html">Sunday — 7:00 AM &amp; 9:00 AM</a></li>
+      <li><a href="liturgy.html">Weekdays — 6:30 AM</a></li>
+      <li><a href="liturgy.html">Confession — Sat 5 PM</a></li>
+    </ul></div>
+    <div class="footer-col footer-contact"><h4>Contact</h4>
+      <p><span class="icon">📍</span>Mekkadambu P.O., Muvattupuzha, Kerala</p>
+      <p><span class="icon">📞</span>0485-XXXXXXX</p>
+    </div>
+  </div></div>
+  <div class="container"><div class="footer-bottom">
+    <p>© 2025 St. Jude Church (RCSC), Mekkadambu.</p>
+    <p>Diocese of Muvattupuzha</p>
+  </div></div>
+</footer>
+
+<button id="scrollTop" aria-label="Scroll to top">↑</button>
+
+<script src="js/main.js"></script>
+<script>
+  // ── Gallery Filter ──
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const thumbs = document.querySelectorAll('.photo-thumb');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-filter');
+      thumbs.forEach(thumb => {
+        const cat = thumb.getAttribute('data-cat');
+        thumb.style.display = (filter === 'all' || cat === filter) ? 'flex' : 'none';
+      });
+    });
+  });
+
+  // ── Lightbox with caption ──
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  document.querySelectorAll('.photo-thumb[data-lightbox]').forEach(item => {
+    item.addEventListener('click', () => {
+      const src = item.getAttribute('data-lightbox');
+      const caption = item.getAttribute('data-caption') || '';
+      // Show emoji as placeholder if no real image
+      lightboxImg.src = src;
+      lightboxImg.onerror = () => { lightboxImg.style.display = 'none'; };
+      lightboxCaption.textContent = caption;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  const closeLB = () => {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+    lightboxImg.style.display = '';
+  };
+  lightboxClose.addEventListener('click', closeLB);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLB(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLB(); });
+</script>
+</body>
+</html>
